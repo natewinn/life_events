@@ -24,22 +24,21 @@ post "/schools" do
 	end
 end	
 
-## EDIT ##
+## DELETE ##
 delete '/schools/:id' do
 	@attended = School.find(params[:id])
 	@attended.destroy
 	redirect '/schools'
 end
 
-class School < ActiveRecord::Base
+
+## UPDATE ##
+put "/schools/:id" do
+	@attended = School.find(params[:id])
+	@attended.update_attributes(params[:school])
+		redirect "/schools/#{@attended.id}"
+	end
 end
 
-
-
-
-
-
-# get "/schools/:id/edit" do
-# 	@attended = School.find(params[:id])
-# 	school/edit
-# end
+class School < ActiveRecord::Base
+end
