@@ -5,6 +5,13 @@ set :database, "sqlite3:///events_data.db"
 
 # -------------------------------------->
 
+## Homepage ##
+get "/" do
+	erb :"/index"
+end
+
+# -------------------------------------->
+
 ## List All Items // School ##
 get "/schools" do
 	@schools_attended = School.all
