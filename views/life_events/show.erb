@@ -1,0 +1,17 @@
+<%= @experienced.life_event %>
+
+
+<!-- ENTRY DELETE FORM -->
+<form action="/life_events/<%= @experienced.id %>" method="post">
+	<input type="hidden" name="_method" value="delete" />
+	<input type="submit" value="Delete"/>
+</form>
+
+
+<!-- ENTRY UPDATE FORM -->
+<form action="/life_events/<%= @experienced.id %>" method="post">
+  <input type="text" id="life_event" name="event[life_event]" placeholder="Update Event" />
+  <input type="submit" name="_method" value="put">
+</form>
+      
+<a href="/life_events">Return to List/a>

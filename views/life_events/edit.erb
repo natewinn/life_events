@@ -1,1 +1,6 @@
-:edit  => page to set up for updating single member => GET '/to_dos/:id/edit'
+<%= @experienced.life_event %>
+
+<form action="<%= @experienced.id %>" method="post">
+	<input type="hidden" name="_method" value="delete" />
+	<input type="submit" value="Delete"/>
+</form>
