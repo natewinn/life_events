@@ -1,0 +1,16 @@
+ ///=> :index => shows static collection of to_dos => GET '/to_dos'///
+
+ <h2>Important Life Events</h2>
+<ul>
+	<% @life_events.each do |life_event| %>
+	<li><%= memorable_events.life_event %></li>
+	<% end %>
+</ul>
+
+
+<form action="/life_events" method="post">
+  <div class="form-group">
+    <input type="text" id="life_event" name="memorable_event" class="form-control login-field" value="" placeholder="Add Event" />
+  </div>
+  <input type="submit" a class="btn btn-primary btn-lg btn-block" ></a>
+</form>
