@@ -1,7 +1,7 @@
 Schools Attended
 <ul>
 	<% @schools_attended.each do |attended| %>
-	<li><%= attended.name_of_school %> - <a href="/schools/<%= attended.id %>">update</a></li>
+	<li><%= attended.name_of_school %> - <a href="/schools/<%= attended.id %>/edit">update</a></li>
 	<% end %>
 </ul>
 

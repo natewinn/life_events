@@ -1,6 +1,16 @@
 <%= @attended.name_of_school %>
 
-<form action="<%= @attended.id %>" method="post">
+<!-- ENTRY DELETE FORM -->
+<form action="/schools/<%= @attended.id %>" method="post">
 	<input type="hidden" name="_method" value="delete" />
 	<input type="submit" value="Delete"/>
 </form>
+
+
+<!-- ENTRY UPDATE FORM -->
+<form action="/schools/<%= @attended.id %>" method="post">
+  <input type="text" id="name_of_school" name="school[name_of_school]" placeholder="update name" />
+  <input type="submit" name="_method" value="put">
+</form>
+
+<a href="/schools">Return to List</a>

@@ -1,7 +1,7 @@
 Life Events
 <ul>
 	<% @events_experienced.each do |experienced| %>
-	<li><%= experienced.life_event %> - <a href="/life_events/<%= experienced.id %>">update</a></li>
+	<li><%= experienced.life_event %> - <a href="/life_events/<%= experienced.id %>/edit">update</a></li>
 	<% end %>
 </ul>
 

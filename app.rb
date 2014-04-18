@@ -5,20 +5,20 @@ set :database, "sqlite3:///events_data.db"
 
 # -------------------------------------->
 
-## Homepage ##
+## Route to Landing Page ##
 get "/" do
 	erb :"/index"
 end
 
 # -------------------------------------->
 
-## List All Items // School ##
+## Route to List View for All Records // School ##
 get "/schools" do
 	@schools_attended = School.all
 	erb :"/schools/index"
 end
 
-## List All Items // Life Event ##
+## Route to List View for All Records // Life Event ##
 get "/life_events" do
 	@events_experienced = Event.all
 	erb :"/life_events/index"
@@ -26,17 +26,31 @@ end
 
 # -------------------------------------->
 
-## View Individual Records // School ##
+## Route to View Individual Records // School ##
 get "/schools/:id" do 
 	@attended = School.find(params[:id])
 	erb :"schools/show"
 end
 
-## View Individual Records // Life Event ##
+## Route to View Individual Records // Life Event ##
 get "/life_events/:id" do 
 	@experienced = Event.find(params[:id])
 	erb :"life_events/show"
 end
+
+# -------------------------------------->
+
+## Route to Edit Individual Records // School ##
+get "/schools/:id/edit" do
+	@attended = School.find(params[:id])
+	erb :"schools/edit"
+end	
+
+## Route needed for "edit" page
+get "/life_events/:id/edit" do
+	@experienced = Event.find(params[:id])
+	erb :"life_events/edit"
+end	
 
 # -------------------------------------->
 
@@ -76,19 +90,19 @@ end
 
 # -------------------------------------->
 
-## Update Exisiting Record // School ##
-put "/schools/:id" do
-	@attended = School.find(params[:id])
-	@attended.update_attributes(params[:school])
-		redirect "/schools/#{@attended.id}"
-end
+# ## Update Exisiting Record // School ##
+# put "/schools/:id" do
+# 	@attended = School.find(params[:id])
+# 	@attended.update_attributes(params[:school])
+# 		redirect "/schools/#{@attended.id}"
+# end
 
-## Update Exisiting Record // Life Events ##
-put "/life_events/:id" do
-	@experienced = Event.find(params[:id])
-	@experienced.update_attributes(params[:event])
-		redirect "/life_events/#{@experienced.id}"
-end
+# ## Update Exisiting Record // Life Events ##
+# put "/life_events/:id" do
+# 	@experienced = Event.find(params[:id])
+# 	@experienced.update_attributes(params[:event])
+# 		redirect "/life_events/#{@experienced.id}"
+# end
 
 # -------------------------------------->
 
