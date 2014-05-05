@@ -1,16 +1,23 @@
-<%= @attended.name_of_school %>
+<!-- School to Edit -->
+<%= @school.name_of_school %> | 
+<%= @school.location_of_school %> | 
+<%= @school.number_of_years %><br>
+<br>
 
-<!-- ENTRY DELETE FORM -->
-<form action="/schools/<%= @attended.id %>" method="post">
+<!-- Update School Form -->
+<form action="/schools/<%= @school.id %>" method="post">
+	<input type="hidden" name="_method" value="put">
+  <input type="text" name="school[name_of_school]" placeholder="<%= @school.name_of_school %>" />
+  <input type="text" name="school[location_of_school]" placeholder="<%= @school.location_of_school %>" />
+  <input type="text" name="school[number_of_years]" placeholder="<%= @school.number_of_years %>" />
+  <input type="submit">
+</form>
+
+<!-- Delete Button -->
+<form action="/schools/<%= @school.id %>" method="post">
 	<input type="hidden" name="_method" value="delete" />
 	<input type="submit" value="Delete"/>
 </form>
 
-
-<!-- ENTRY UPDATE FORM -->
-<form action="/schools/<%= @attended.id %>" method="post">
-  <input type="text" id="name_of_school" name="school[name_of_school]" placeholder="update name" />
-  <input type="submit" name="_method" value="put">
-</form>
-
-<a href="/schools">Return to List</a>
+<!-- Link to Return to School -->
+<a href="/schools">Return to School List</a>

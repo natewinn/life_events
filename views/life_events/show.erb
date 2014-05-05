@@ -1,3 +1,6 @@
-<%= @experienced.life_event %>
-      
+<!-- Individual Life Event Record -->
+<%= @event.life_event %> | 
+<%= @event.event_location %> | 
+<%= @event.event_date.strftime("%B %d, %Y") %><br>
+<br>      
 <a href="/life_events">Return to List</a>

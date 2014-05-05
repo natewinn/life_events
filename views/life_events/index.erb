@@ -1,12 +1,23 @@
-Life Events
+<h1>Memorable Life Events</h1>
+
+<!-- List Life Events -->
 <ul>
-	<% @events_experienced.each do |experienced| %>
-	<li><%= experienced.life_event %> - <a href="/life_events/<%= experienced.id %>/edit">update</a></li>
+	<% @events.each do |event| %>
+		<li><a href="life_events/<%=event.id %>"><%= event.life_event %></a> | 
+			<%= event.event_location %> | 
+			<%= event.event_date.strftime("%B %d, %Y") %><br>
+			<button><a href="life_events/<%= event.id %>/edit">update</a></button>
+			<form action="life_events/<%= event.id %>" method="post" />
+				<input type="hidden" name="_method" value="delete" />
+				<input type="submit" value="Delete" />
+			</form>
+		</li>
 	<% end %>
 </ul>
 
-<form action="/life_events" method="post">
-    <input type="text" id="life_event" name="[event]life_event" value="" placeholder="Add Event"/>
-  </div>
-  <input type="submit"</a>
-</form>
+<!-- Link to Add a Life Event -->
+<a href="/life_events/new">Add a New Life Event</a><br>
+<br>
+
+<!-- Link to Homepage -->
+<a href="../">Return to Homepage</a>

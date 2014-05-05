@@ -1,16 +1,23 @@
-<%= @experienced.life_event %>
+<!-- Life Event to Edit -->
+<%= @event.life_event %> | 
+<%= @event.event_location %> | 
+<%= @event.event_date.strftime("%B %d, %Y") %><br>
+<br>
 
-<!-- ENTRY DELETE FORM -->
-<form action="/life_events/<%= @experienced.id %>" method="post">
+<!-- Update Life Event Form -->
+<form action="/life_events/<%= @event.id %>" method="post">
+	<input type="hidden" name="_method" value="put">
+  <input type="text" name="event[life_event]" placeholder="<%= @event.life_event %>" />
+  <input type="text" name="event[event_location]" placeholder="<%= @event.event_location %>" />
+  <input type="text" name="event[event_date]" placeholder="<%= @event.event_date.strftime("%B %d, %Y") %>" />  
+  <input type="submit">
+</form>
+
+<!-- Delete Form -->
+<form action="/life_events/<%= @event.id %>" method="post">
 	<input type="hidden" name="_method" value="delete" />
 	<input type="submit" value="Delete"/>
 </form>
 
-
-<!-- ENTRY UPDATE FORM -->
-<form action="/life_events/<%= @experienced.id %>" method="post">
-  <input type="text" id="life_event" name="event[life_event]" placeholder="Update Event" />
-  <input type="submit" name="_method" value="put">
-</form>
-      
-<a href="/life_events">Return to List/a>
+<!-- Link to Return to Life Events -->      
+<a href="/life_events">Return to List</a>

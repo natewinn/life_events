@@ -3,108 +3,105 @@ require 'sinatra/activerecord'
 
 set :database, "sqlite3:///events_data.db"
 
-# -------------------------------------->
+# Landing Page Route ------------------------->
 
-## Route to Landing Page ##
 get "/" do
 	erb :"/index"
 end
 
-# -------------------------------------->
+# List All Records Route --------------------->
 
-## Route to List View for All Records // School ##
 get "/schools" do
-	@schools_attended = School.all
+	@schools = School.all
 	erb :"/schools/index"
 end
 
-## Route to List View for All Records // Life Event ##
 get "/life_events" do
-	@events_experienced = Event.all
+	@events = Event.all
 	erb :"/life_events/index"
 end
 
-# -------------------------------------->
+# New Record Form Route ---------------------->
 
-## Route to View Individual Records // School ##
-get "/schools/:id" do 
-	@attended = School.find(params[:id])
-	erb :"schools/show"
+get "/schools/new" do
+   erb :"schools/new"
 end
 
-## Route to View Individual Records // Life Event ##
-get "/life_events/:id" do 
-	@experienced = Event.find(params[:id])
-	erb :"life_events/show"
+get "/life_events/new" do
+   erb :"life_events/new"
 end
 
-# -------------------------------------->
+# Add New Records Route ---------------------->
 
-## Route to Edit Individual Records // School ##
-get "/schools/:id/edit" do
-	@attended = School.find(params[:id])
-	erb :"schools/edit"
-end	
-
-## Route needed for "edit" page
-get "/life_events/:id/edit" do
-	@experienced = Event.find(params[:id])
-	erb :"life_events/edit"
-end	
-
-# -------------------------------------->
-
-## Add New Records // School ##
 post "/schools" do
-	puts params[:school]
 	school = School.new(params[:school])
 	if school.save
 		redirect "/schools"
 	end
-end	
+end
 
-## Add New Records // Life Events ##
 post "/life_events" do
-	puts params[:event]
 	event = Event.new(params[:event])
 	if event.save
 		redirect "/life_events"
 	end
 end	
 
-# -------------------------------------->
+# View Individual Record Route -------------->
 
-## Delete Existing Record // School ##
+get "/schools/:id" do 
+	@school = School.find(params[:id])
+	erb :"schools/show"
+end
+
+get "/life_events/:id" do 
+	@event = Event.find(params[:id])
+	erb :"life_events/show"
+end
+
+# Edit Individual Record Form Route --------->
+
+get "/schools/:id/edit" do
+	@school = School.find(params[:id])
+	erb :"schools/edit"
+end	
+
+get "/life_events/:id/edit" do
+	@event = Event.find(params[:id])
+	erb :"life_events/edit"
+end	
+
+# Update Individual Record Route ------------->
+
+put "/schools/:id" do
+	@school = School.find(params[:id])
+	if @school.update_attributes(params[:school])
+		redirect "/schools/#{@school.id}"
+	end
+end
+
+put "/life_events/:id" do
+	@event = Event.find(params[:id])
+	if @event.update_attributes(params[:event])
+		redirect "/life_events/#{@event.id}"
+	end
+end
+
+# Delete Individual Records Route ------------>
+
 delete '/schools/:id' do
-	@attended = School.find(params[:id])
-	@attended.destroy
+	@school = School.find(params[:id])
+	@school.destroy
 	redirect '/schools'
 end
 
-## Delete Existing Record // Life Events ##
 delete '/life_events/:id' do
-	@experienced = Event.find(params[:id])
-	@experienced.destroy
+	@event = Event.find(params[:id])
+	@event.destroy
 	redirect '/life_events'
 end
 
-# -------------------------------------->
-
-# ## Update Exisiting Record // School ##
-# put "/schools/:id" do
-# 	@attended = School.find(params[:id])
-# 	@attended.update_attributes(params[:school])
-# 		redirect "/schools/#{@attended.id}"
-# end
-
-# ## Update Exisiting Record // Life Events ##
-# put "/life_events/:id" do
-# 	@experienced = Event.find(params[:id])
-# 	@experienced.update_attributes(params[:event])
-# 		redirect "/life_events/#{@experienced.id}"
-# end
-
-# -------------------------------------->
+# -------------------------------------------->
 
 class School < ActiveRecord::Base
 end
